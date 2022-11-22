@@ -4,7 +4,7 @@
  */
 package org.example.view;
 
-import org.example.controler.UserControler;
+import org.example.controler.UserController;
 import javax.swing.JOptionPane;
 
 /**
@@ -153,8 +153,8 @@ public class auth extends javax.swing.JFrame {
      
        String login =  jTextFieldLogin.getText();
        String pwd =  String.valueOf(jPasswordField1.getPassword());
-        UserControler uc = new UserControler();
-        if(uc.connect(login, pwd)){
+
+        if(UserController.connect(login, pwd)){
               
             JOptionPane.showMessageDialog(this,
             "Connecté avec success "+ login.toUpperCase(),

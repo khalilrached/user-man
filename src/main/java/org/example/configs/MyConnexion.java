@@ -4,6 +4,7 @@
  */
 package org.example.configs;
 
+import java.beans.JavaBean;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,45 +17,29 @@ import javax.swing.JOptionPane;
  * @author omrani
  */
 public class MyConnexion {
-
-    private String url="jdbc:mysql://localhost:3306/db_polytech_gl4_2022?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private String login="root";
-    private String pwd="";
-
+    
+    private static String url = "jdbc:mysql://localhost:3306/db_polytech_gl4_2022";
+    private static String login = "root";
+    private static String pwd = "";
+    
     private static Connection connection;
-
-    private static MyConnexion instance =null;
-
-
-
-    private MyConnexion() {
+    
+    
+    
+    public static void init() {
         try {
-
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(this.url,this.login,this.pwd);
-        } catch (SQLException ex) {
-            Logger.getLogger(MyConnexion.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Serveur n'est pas démarrer !\n Merci de lancer le serveur", "Erreur de connection au serveur", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
-        } catch (ClassNotFoundException ex) {
+          
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url,login,pwd);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MyConnexion.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Serveur n'est pas démarrer !\n Merci de lancer le serveur", "Erreur de connection au serveur", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-
     }
-
-    public static MyConnexion getInstance(){
-        if(instance == null){
-            instance = new MyConnexion();
-        }
-        return instance;
-    }
-
-
     public static Connection getConnection() {
+        if(connection == null) init();
         return connection;
-    }
-
+    }    
 
 }

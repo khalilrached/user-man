@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.controler.UserControler;
+import org.example.controler.UserController;
 import org.example.model.User;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ public class UpdateForm extends JDialog {
     private JButton saveButton;
     private JTextField name;
 
-    public int up_id;
+    public int del_id;
     public User user;
     public UpdateForm() {
         setTitle("Update user");
@@ -31,7 +31,7 @@ public class UpdateForm extends JDialog {
         });
     }
     public void run(User user){
-        this.up_id = user.getId();
+        this.del_id = user.getId();
         this.user = user;
         id.setText(""+user.getId());
         login.setText(user.getLogin());
@@ -48,9 +48,6 @@ public class UpdateForm extends JDialog {
         this.user.setEmail(email.getText());
         this.user.setPwd(pwd.getText());
         System.out.println(this.user.toString());
-        if(new UserControler().update(this.up_id,this.user)){
-            userList.refresh();
-            this.setVisible(false);
-        }
+        UserController.update(this.del_id,this.user);
     }
 }
