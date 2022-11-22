@@ -4,15 +4,11 @@
  */
 package org.example.view;
 
-import org.example.controler.UserControler;
+import org.example.controler.UserController;
 import org.example.model.User;
 import org.example.utils.TableParser;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +22,7 @@ public class userList extends javax.swing.JFrame {
      */
     public userList() {
         initComponents();
-        ArrayList<User> userList = new UserControler().retrieveAll();
+        ArrayList<User> userList = UserController.retrieveAll();
         jTable1.setModel(TableParser.parse(userList));
     }
 
@@ -247,12 +243,12 @@ public class userList extends javax.swing.JFrame {
             int p = JOptionPane.showConfirmDialog(this,"select row plz!","Info message",JOptionPane.INFORMATION_MESSAGE);
             if(p == 0){
                 int id = (int) jTable1.getValueAt(x,0);
-                if(new UserControler().delete(id)){
+                if(UserController.delete(id)){
                     JOptionPane.showMessageDialog(this,
                             "User Deleted with success!",
                             "Information Message", JOptionPane.INFORMATION_MESSAGE);
                 };
-                jTable1.setModel(TableParser.parse(new UserControler().retrieveAll()));
+                jTable1.setModel(TableParser.parse(UserController.retrieveAll()));
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -279,7 +275,7 @@ public class userList extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ArrayList<User> users = new UserControler().retrieveByKeyWord(jLabel4.getText());
+        ArrayList<User> users = UserController.retrieveByKeyWord(jLabel4.getText());
         jTable1.setModel(TableParser.parse(users));
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -310,7 +306,6 @@ public class userList extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

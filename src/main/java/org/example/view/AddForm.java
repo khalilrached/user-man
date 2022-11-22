@@ -12,8 +12,6 @@ public class AddForm extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
-
     }
 
 }

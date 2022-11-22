@@ -1,8 +1,6 @@
 package org.example.view;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.example.controler.UserControler;
+import org.example.controler.UserController;
 import org.example.model.User;
 
 import javax.swing.*;
@@ -50,6 +48,6 @@ public class UpdateForm extends JDialog {
         this.user.setEmail(email.getText());
         this.user.setPwd(pwd.getText());
         System.out.println(this.user.toString());
-        new UserControler().update(this.del_id,this.user);
+        UserController.update(this.del_id,this.user);
     }
 }
