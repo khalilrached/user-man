@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.controler.UserControler;
+import org.example.controler.UserController;
 import org.example.model.User;
 
 import javax.swing.*;
@@ -47,7 +47,7 @@ public class AddForm extends JDialog {
         user.setEmail(email.getText());
         user.setPwd(pwd.getText());
         System.out.println(user.toString());
-        if(new UserControler().create(user)){
+        if(UserController.create(user)){
             userList.refresh();
             this.setVisible(false);
         }
