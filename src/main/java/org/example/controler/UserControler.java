@@ -38,7 +38,8 @@ public class UserControler implements I_CRUD<User>
     @Override
     public boolean create(User obj) {
         try {
-            String sql ="INSERT INTO user VALUES ( name ='"+ obj.getName()+"',email ='"+obj.getEmail()+"', login ='"+ obj.getLogin()+"',pwd ='"+ obj.getPwd()+"')";
+            String sql ="INSERT INTO user(name,email,login,pwd) VALUES ( '"+ obj.getName()+"','"+obj.getEmail()+"', '"+ obj.getLogin()+"','"+ obj.getPwd()+"')";
+            System.out.println(sql);
             return (st.executeUpdate(sql)==1);
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

@@ -1,7 +1,5 @@
 package org.example.view;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.example.controler.UserControler;
 import org.example.model.User;
 
@@ -18,7 +16,7 @@ public class UpdateForm extends JDialog {
     private JButton saveButton;
     private JTextField name;
 
-    public int del_id;
+    public int up_id;
     public User user;
     public UpdateForm() {
         setTitle("Update user");
@@ -33,7 +31,7 @@ public class UpdateForm extends JDialog {
         });
     }
     public void run(User user){
-        this.del_id = user.getId();
+        this.up_id = user.getId();
         this.user = user;
         id.setText(""+user.getId());
         login.setText(user.getLogin());
@@ -50,6 +48,9 @@ public class UpdateForm extends JDialog {
         this.user.setEmail(email.getText());
         this.user.setPwd(pwd.getText());
         System.out.println(this.user.toString());
-        new UserControler().update(this.del_id,this.user);
+        if(new UserControler().update(this.up_id,this.user)){
+            userList.refresh();
+            this.setVisible(false);
+        }
     }
 }

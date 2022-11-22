@@ -9,10 +9,6 @@ import org.example.model.User;
 import org.example.utils.TableParser;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -20,16 +16,15 @@ import java.util.ArrayList;
  * @author omrani
  */
 public class userList extends javax.swing.JFrame {
-
     /**
      * Creates new form auth
      */
     public userList() {
         initComponents();
-        ArrayList<User> userList = new UserControler().retrieveAll();
-        jTable1.setModel(TableParser.parse(userList));
     }
-
+    static public void refresh(){
+        jTable1.setModel(TableParser.parse(new UserControler().retrieveAll()));
+    };
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,14 +263,18 @@ public class userList extends javax.swing.JFrame {
             user.setEmail((String) jTable1.getValueAt(x,2));
             user.setLogin((String) jTable1.getValueAt(x,3));
             user.setPwd((String) jTable1.getValueAt(x,4));
-            System.out.println(user.toString());
             UpdateForm updateForm = new UpdateForm();
+            updateForm.up_id = user.getId();
             updateForm.run(user);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
+
+            AddForm addForm = new AddForm();
+            addForm.run();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -332,6 +331,6 @@ public class userList extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
